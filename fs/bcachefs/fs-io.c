@@ -857,9 +857,6 @@ loff_t bch2_remap_file_range(struct file *file_src, loff_t pos_src,
 	if (remap_flags & ~(REMAP_FILE_DEDUP|REMAP_FILE_ADVISORY))
 		return -EINVAL;
 
-	if (remap_flags & REMAP_FILE_DEDUP)
-		return -EOPNOTSUPP;
-
 	if ((pos_src & (block_bytes(c) - 1)) ||
 	    (pos_dst & (block_bytes(c) - 1)))
 		return -EINVAL;
