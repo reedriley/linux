@@ -1365,7 +1365,7 @@ void bch2_ptr_swab(struct bkey_s k)
 	for (entry = ptrs.start;
 	     entry < ptrs.end;
 	     entry = extent_entry_next(entry)) {
-		switch (extent_entry_type(entry)) {
+		switch (__extent_entry_type(entry)) {
 		case BCH_EXTENT_ENTRY_ptr:
 			break;
 		case BCH_EXTENT_ENTRY_crc32:
@@ -1385,6 +1385,9 @@ void bch2_ptr_swab(struct bkey_s k)
 			break;
 		case BCH_EXTENT_ENTRY_rebalance:
 			break;
+		default:
+			/* Bad entry type: will be caught by validate() */
+			return;
 		}
 	}
 }
