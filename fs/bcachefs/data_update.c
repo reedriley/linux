@@ -160,6 +160,7 @@ static void trace_io_move_fail2(struct data_update *m,
 	prt_newline(&buf);
 
 	bch2_data_update_opts_to_text(&buf, c, &m->op.opts, &m->data_opts);
+	prt_newline(&buf);
 
 	prt_str(&buf, "\nold:    ");
 	bch2_bkey_val_to_text(&buf, c, old);
@@ -607,6 +608,7 @@ void bch2_data_update_inflight_to_text(struct printbuf *out, struct data_update 
 	prt_newline(out);
 	printbuf_indent_add(out, 2);
 	bch2_data_update_opts_to_text(out, m->op.c, &m->op.opts, &m->data_opts);
+	prt_newline(out);
 	prt_printf(out, "read_done:\t%u\n", m->read_done);
 	bch2_write_op_to_text(out, &m->op);
 	printbuf_indent_sub(out, 2);
